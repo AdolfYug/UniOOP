@@ -1,17 +1,16 @@
-#include <iostream>
+﻿#include <iostream>
 #include <cstdio>
 #include <locale.h>
-#include "Header1.h"
+#include "Algoritm1.h"
 
 using namespace std;
 
 int main()
 {
-	setlocale(LC_ALL, "Rus");
 	int size;
-	cout << "Введите размер поля: ";
+	cout << "Enter size of field: ";
 	cin >> size;
-	KrestikiNoliki field(size); 
+	KrestikiNoliki field(size);
 	for (int i = 0; i < size; i++) {
 		for (int j = 0; j < size; j++)
 			field[i][j] = ' ';
