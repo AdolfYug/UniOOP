@@ -11,6 +11,7 @@ class KrestikiNoliki
 	char* field;
 	int size;
 public:
+	setlocale(LC_ALL, "Rus");
 	KrestikiNoliki(int sies)
 	{
 		size = sies;
