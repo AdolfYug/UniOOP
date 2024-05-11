@@ -11,7 +11,6 @@ class KrestikiNoliki
 	char* field;
 	int size;
 public:
-	setlocale(LC_ALL, "Rus");
 	KrestikiNoliki(int sies)
 	{
 		size = sies;
@@ -113,6 +112,7 @@ public:
 	}
 	void game(KrestikiNoliki& field)
 	{
+		setlocale(LC_ALL, "Rus");
 		int player = 'x';
 		char result;
 		int running = 1;
