@@ -112,7 +112,6 @@ public:
 	}
 	void game(KrestikiNoliki& field)
 	{
-		setlocale(LC_ALL, "Rus");
 		int player = 'x';
 		char result;
 		int running = 1;
@@ -120,6 +119,7 @@ public:
 		bool vvod = true;
 		while (running) {
 			do {
+				setlocale(LC_ALL, "Rus");
 				if (vvod == false) {
 					cout << "Повтрорите ввод\n";
 				}
