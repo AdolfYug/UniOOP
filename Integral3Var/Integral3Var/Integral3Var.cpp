@@ -90,7 +90,7 @@ int main() {
     cin >> a;
     cout << "Введите верхнюю границу: " << endl;
     cin >> b;
-    cout << "Введите количество шагов: " << endl;
+    cout << "Введите количество узлов: " << endl;
     cin >> n;
 
     RectangleIntegration rectInt;
