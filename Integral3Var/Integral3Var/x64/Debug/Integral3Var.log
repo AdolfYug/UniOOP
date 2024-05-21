@@ -1,0 +1,5 @@
+﻿  Integral3Var.cpp
+D:\Git\UniOOP\Integral\Integral3Var\Integral3Var\Integral3Var.cpp(101,57): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+D:\Git\UniOOP\Integral\Integral3Var\Integral3Var\Integral3Var.cpp(104,57): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+D:\Git\UniOOP\Integral\Integral3Var\Integral3Var\Integral3Var.cpp(107,57): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+  Integral3Var.vcxproj -> D:\Git\UniOOP\Integral\Integral3Var\x64\Debug\Integral3Var.exe
