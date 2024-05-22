@@ -1,155 +1,85 @@
-#define _ALGORITM1_H
 #include <iostream>
-#include <cstdio>
-#include <locale.h>
 
-using namespace std;
-class KrestikiNoliki
-{
-	char* field;
-	int size;
+class TicTacToe {
+private:
+    char board[3][3];
+    char currentPlayer;
+
 public:
-	KrestikiNoliki(int sies)
-	{
-		size = sies;
-		field = new char[size * size];
+    TicTacToe() {
+        currentPlayer = 'X';
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                board[i][j] = ' ';
+            }
+        }
+    }
 
-	}
-	~KrestikiNoliki()
-	{
-		delete[] field;
-	}
-	char* operator[](int row)
-	{
-		return field + row * size;
-	}
-	void print(KrestikiNoliki& field) {
-		system("cls");
-		for (int j = 0; j < size; j++) {
-			cout << "--";
+    void printBoard() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                std::cout << board[i][j] << " ";
+            }
+            std::cout << std::endl;
+        }
+    }
 
-		}
-		cout << "-\n";
+    bool makeMove(int row, int col) {
+        if (row < 0 || row >= 3 || col < 0 || col >= 3 || board[row][col] != ' ') {
+            return false;
+        }
 
-		for (int i = 0; i < size; i++) {
+        board[row][col] = currentPlayer;
+        if (currentPlayer == 'X') {
+            currentPlayer = 'O';
+        } else {
+            currentPlayer = 'X';
+        }
+        return true;
+    }
 
-			for (int j = 0; j < size; j++) {
-				cout << "|" << field[i][j];
-			}
-			cout << "|\n";
-
-			for (int j = 0; j < size; j++) {
-				cout << "--";
-			}
-			cout << "-\n";
-		}
-	}
-	int check(KrestikiNoliki& field) {
-		int g, v;
-		int d1, d2;
-
-		for (int i = 0; i < size; i++) {
-
-			g = field[i][0];
-
-			for (int j = 0; j < size; j++) {
-
-				if (field[i][j] != g || g == ' ') {
-					g = ' ';
-					break;
-				}
-			}
-
-			if (g != ' ') {
-				return g;
-			}
-
-			v = field[0][i];
-
-			for (int j = 0; j < size; j++) {
-				if (field[j][i] != v || v == ' ') {
-					v = ' ';
-
-					break;
-				}
-			}
-
-			if (v != ' ') {
-				return v;
-			}
-		}
-		d1 = field[0][0];
-		d2 = field[0][size - 1];
-		// |X|| || |
-		// | ||X|| |
-		// | || ||X|
-		for (int i = 0; i < size; i++) {
-			if (field[i][i] != d1) {
-				d1 = ' ';
-
-				break;
-			}
-		}
-		if (d1 != ' ') {
-			return d1;
-		}
-		// | || ||X|
-		// | ||X|| |
-		// |X|| || |
-		for (int i = 0; i < size; i++) {
-			if (field[i][size - 1 - i] != d2) {
-				d2 = ' ';
-
-				break;
-			}
-		}
-		if (d2 != ' ') {
-			return d2;
-		}
-		return ' ';
-	}
-
-	void game(KrestikiNoliki& field)
-	{
-		int player = 'x';
-		char result;
-		int running = 1;
-		int i = 0, j = 0;
-		bool vvod = true;
-
-		while (running) {
-			do {
-				if (vvod == false) {
-					cout << "Repeat\n";
-				}
-				field.print(field);
-				if (player == 'x') {
-					cout << "Player x turn\n";
-				}
-				else {
-					cout << "Player y turn\n";
-
-				}
-				cout << "Enter coordinates x y: ";
-				cin >> i >> j;
-
-				vvod = false;
-			} while (i > size || j > size || i < 0 || j < 0 || field[i - 1][j - 1] != ' ');
-
-			vvod = true;
-			field[i - 1][j - 1] = player;
-			result = field.check(field);
-			if (result != ' ') {
-				cout << "Player " << result << " wins!";
-				running = 0;
-			}
-
-			if (player == 'x') {
-				player = 'o';
-			}
-			else {
-				player = 'x';
-			}
-		}
-	}
+    char checkWinner() {
+        for (int i = 0; i < 3; i++) {
+            if (board[i][0] != ' ' && board[i][0] == board[i][1] && board[i][0] == board[i][2]) {
+                return board[i][0];
+            }
+            if (board[0][i] != ' ' && board[0][i] == board[1][i] && board[0][i] == board[2][i]) {
+                return board[0][i];
+            }
+        }
+        if (board[0][0] != ' ' && board[0][0] == board[1][1] && board[0][0] == board[2][2]) {
+            return board[0][0];
+        }
+        if (board[0][2] != ' ' && board[0][2] == board[1][1] && board[0][2] == board[2][0]) {
+            return board[0][2];
+        }
+        return ' ';
+    }
 };
+
+int main() {
+    TicTacToe game;
+    int row, col;
+    
+    while (game.checkWinner() == ' ') {
+        game.printBoard();
+        
+        std::cout << "Player " << game.currentPlayer << ", enter your move (row col): ";
+        std::cin >> row >> col;
+        
+        if (!game.makeMove(row, col)) {
+            std::cout << "Invalid move. Try again." << std::endl;
+        }
+    }
+
+    game.printBoard();
+    char winner = game.checkWinner();
+    
+    if (winner == ' ') {
+        std::cout << "It's a draw!" << std::endl;
+    } else {
+        std::cout << "Player " << winner << " wins!" << std::endl;
+    }
+
+    return 0;
+}
